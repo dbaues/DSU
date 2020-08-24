@@ -16,6 +16,29 @@ void addTo(int L[], int n, int v) {
         L[i] += v;
 }
 
+// Places the highest and lowest value in the first [n] elements
+// into pointers [h] and [l] from array [L].
+void highlow(int L[], int n, int *h, int *l) {
+    int i;
+    *h = L[0];
+    *l = L[0];
+    for(i=0; i<n; i++){
+        if(L[i] > *h){ *h = L[i]; }
+        else if(L[i] < *l){ *l = L[i]; }
+    }
+}
+
+// How many times [v] occurs in the first [n] elements of array [L].
+int freq(int L[], int n, int v){
+    int i, freq=0;
+    for(i=0; i<n; i++)
+    {
+        if(v == L[i])
+            freq++;
+    }
+    return freq;
+}
+
 // Prints the first [n] elements from array [L].
 void printList(int L[], int n) {
     int i;
@@ -41,12 +64,14 @@ int main() {
         printList(A, 5);
         printf("B: ");
         printList(B, 5);
+        printf("\n");
     }
     // sum()
     {
         printf("Print the sum of the first 5:\n");
         printf("A: %d\n", sum(A, 5));
         printf("B: %d\n", sum(B, 5));
+        printf("\n");
     }
     // addTo()
     {
@@ -59,7 +84,23 @@ int main() {
         printList(A, 5);
         addTo(B, 3, 4);
         printList(B, 5);
+        printf("\n");
 
+    }
+    // highlow()
+    {
+        printf("Finds the High and Low of the first X elements.\n");
+        int h, l;
+        highlow(A, 5, &h, &l);
+        printf("A: High - %d; Low - %d\n", h, l);
+        highlow(B, 5, &h, &l);
+        printf("B: High - %d; Low - %d\n", h, l);
+        printf("\n");
+    }
+    // freq()
+    {
+        printf("Frequency of 4 in A: %d\n", freq(A, 5, 4));
+        printf("\n");
     }
     return 0;
 }
